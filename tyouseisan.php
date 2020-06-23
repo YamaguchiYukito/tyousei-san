@@ -17,12 +17,16 @@
 	  die();
       }
       
-      $sql = 'SELECT * FROM member_t';
+      $sql = 'SELECT * FROM event_t';
       $stmt = $pdo->query($sql);
-      $result = $stmt->fetchAll();
-      // var_dump($result);
-      foreach($result as $member) {
-	  print($member[0]. " : ". $member[1]. "<br>");
+      $events = $stmt->fetchAll();
+      $protocol = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://');
+      $host = $_SERVER['HTTP_HOST'];
+      print("イベント名, 主催者, 作成日、詳細、URL<br>");
+      foreach($events as $event) {
+	  $event_page = $protocol .$host ."/events/" .$event['url'];
+	  print($event['name'] .", " .$event['sponsor'] .", " .$event['create_date'] .", " .$event['detail']);
+	  print(', <a href="' .$event_page .'">' .$event_page .'</a><br>');
       }
       ?>
     </p>
