@@ -50,7 +50,7 @@
 	  foreach($stmt as $s) {
 	      $id = $s['id'] + 1;
 	  }
-
+	  
 	  // イベントをデータベースに登録
 	  $values = $id .", '" .$_POST['event_name'] ."', '" .$_POST['sponsor_name'] ."', '" .date("Y/m/d") ."', '" .$event_detail ."', '" .$url ."'" .$date_string;
 	  $sql = "INSERT INTO event_t VALUES (" .$values .");";
