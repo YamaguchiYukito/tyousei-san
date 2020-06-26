@@ -24,7 +24,7 @@
       $host = $_SERVER['HTTP_HOST'];
       print("イベント名, 主催者, 作成日、詳細、URL<br>");
       foreach($events as $event) {
-	  $event_page = $protocol .$host ."/events/" .$event['url'];
+	  $event_page = $protocol .$host ."/events/" .$event['url'] .".php";
 	  print($event['name'] .", " .$event['sponsor'] .", " .$event['create_date'] .", " .$event['detail']);
 	  print(', <a href="' .$event_page .'">' .$event_page .'</a><br>');
       }

@@ -11,7 +11,7 @@
       <?php
       // ページのURLを設定
       // $page_url = '-bxjgcwoj6jrxwjyzv3yphd70lw5xqt0';
-      $page_url = "<%PAGEURL>";
+      $page_url = "-bxjgcwoj6jrxwjyzv3yphd70lw5xqt0";
       
       // MYSQLに接続
       try {

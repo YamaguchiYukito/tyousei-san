@@ -13,11 +13,10 @@
 	  $event_name = $_POST['event_name'];
 	  $sponsor_name = $_POST['event_name'];
 	  $event_detail = $_POST['event_detail'];
-	  $date_array = array();
+	  $dgate_array = array();
 	  foreach($_POST['event_days'] as $day) {
 	      if(!empty($day)) {
 		  array_push($date_array, $day);
-		  print($day ."<br>");
 	      }
 	  }
 	  // ランダムなURLの発行
@@ -33,7 +32,6 @@
 		  $date_string = $date_string .", NULL";
 	      }
 	  }
-	  echo "event_name : " .$event_name ."<br>"; 
 
 	  // MYSQLに接続
 	  try {
@@ -55,13 +53,27 @@
 	  $values = $id .", '" .$_POST['event_name'] ."', '" .$_POST['sponsor_name'] ."', '" .date("Y/m/d") ."', '" .$event_detail ."', '" .$url ."'" .$date_string;
 	  $sql = "INSERT INTO event_t VALUES (" .$values .");";
 	  $stmt = $pdo->query($sql);
-	  echo $sql ."<br>";
 
 	  // URL発行
 	  echo "こちらのURLを共有してください。<br>";
 	  $protocol = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://');
-	  $event_page = $protocol .$_SERVER['HTTP_HOST'] ."/events/" .$url;
-	  print('<a href="' .$event_page .'">' .$event_page ."</a>");
+	  $file_directory = "/events/";
+	  $file_name = $url .".php";
+	  $event_page_url = $protocol .$_SERVER['HTTP_HOST'] .$file_directory .$file_name;
+	  print('<a href="' .$event_page_url .'">' .$event_page_url ."</a>");
+	  
+	  // phpページ作成
+	  /*
+	  $original_file = file_get_contents('entry_event.php');
+	  $original_file = str_replace("<%PAGEURL>", $url, $original_file);
+	  $original_file = mb_convert_encoding($original_file, "UTF-8", "AUTO");
+	     // 下にあるfile_put_contents と同等の処理です。
+	     $handle = fopen("test.php", "w");
+	     fwrite($handle, $original_file);
+	     fclose($handle);
+	   
+	  file_put_contents("test.txt", $original_file);
+	  */
 	  ?>
 	</p>
       </div>
