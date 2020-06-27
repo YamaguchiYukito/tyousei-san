@@ -10,7 +10,7 @@
     <table border="1" width="50%">
       <?php
       // ページのURLを設定
-      $page_url = "<%PAGEURL>";
+      $page_url = "ytn2arfapi2yxy3n08kkn4ov53mcops5";
       
       // MYSQLに接続
       try {

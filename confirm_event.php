@@ -5,15 +5,16 @@
     <title>調整さん</title>
   </head>
   <body>
+    <h1>調整さん</h1>
     <form method="post" action="">
       <div class="element_wrap">
-	<label>作成完了</label>
+	<h2><label>作成完了</label></h2>
 	<p>
 	  <?php
 	  $event_name = $_POST['event_name'];
 	  $sponsor_name = $_POST['event_name'];
 	  $event_detail = $_POST['event_detail'];
-	  $dgate_array = array();
+	  $date_array = array();
 	  foreach($_POST['event_days'] as $day) {
 	      if(!empty($day)) {
 		  array_push($date_array, $day);
@@ -55,7 +56,7 @@
 	  $stmt = $pdo->query($sql);
 
 	  // URL発行
-	  echo "こちらのURLを共有してください。<br>";
+	  echo "<h3>こちらのURLを共有してください。</h3>";
 	  $protocol = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://');
 	  $file_directory = "/events/";
 	  $file_name = $url .".php";
@@ -63,17 +64,9 @@
 	  print('<a href="' .$event_page_url .'">' .$event_page_url ."</a>");
 	  
 	  // phpページ作成
-	  /*
-	  $original_file = file_get_contents('entry_event.php');
-	  $original_file = str_replace("<%PAGEURL>", $url, $original_file);
-	  $original_file = mb_convert_encoding($original_file, "UTF-8", "AUTO");
-	     // 下にあるfile_put_contents と同等の処理です。
-	     $handle = fopen("test.php", "w");
-	     fwrite($handle, $original_file);
-	     fclose($handle);
-	   
-	  file_put_contents("test.txt", $original_file);
-	  */
+	  // -----------------------------------------------
+	  // 保留
+	  // -----------------------------------------------
 	  ?>
 	</p>
       </div>
