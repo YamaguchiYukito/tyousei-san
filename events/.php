@@ -11,7 +11,7 @@
     <table>
       <?php
       // ページのURLを設定
-      $page_url = "zhhsfz7j7xmw4hz503xn1l_n8kz0ehyv";
+      $page_url = "";
       
       // MYSQLに接続
       try {

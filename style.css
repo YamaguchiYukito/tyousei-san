@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+body {
+    background: #fff6e6;
+    font-family: Meiryo;
+}
+
+h1 {
+    background: #e6fcff;
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #cccccc;
+    margin: 30px auto;
+}
+
+table {
+    background: #ffffff;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+table th, table td {
+    border: solid 1px black;
+}
+
+table th {
+    background: #e9e6ff;
+}

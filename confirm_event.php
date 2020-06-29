@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>調整さん</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>調整さん</h1>
@@ -11,6 +12,7 @@
 	<h2><label>作成完了</label></h2>
 	<p>
 	  <?php
+	  // ユーザ入力内容の処理
 	  $event_name = $_POST['event_name'];
 	  $sponsor_name = $_POST['event_name'];
 	  $event_detail = $_POST['event_detail'];
@@ -20,6 +22,7 @@
 		  array_push($date_array, $day);
 	      }
 	  }
+	  
 	  // ランダムなURLの発行
 	  $url_size = 32;
 	  $url = strtolower(substr(str_replace(['/', '+'], ['_', '-'], base64_encode(random_bytes($url_size))), 0, $url_size));

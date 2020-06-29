@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>調整さん</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>調整さん</h1>
@@ -17,8 +18,11 @@
 			  echo $_POST['event_name'];
 		      }
 		      ?>">
-	<div id="event_name_alert">
+	<div id="event_name_alert_empty">
 	  イベント名を入力してください。
+	</div>
+	<div id="event_name_alert_over">
+	  イベント名は30文字以内で入力してください。
 	</div>
       </div>
       <div class="element_wrap">
@@ -30,8 +34,11 @@
 			  echo $_POST['sponsor_name'];
 		      }
 		      ?>">
-	<div id="sponsor_name_alert">
-	  主催者を入力してください。
+	<div id="sponsor_name_alert_empty">
+	  主催者名を入力してください。
+	</div>
+	<div id="sponsor_name_alert_over">
+	  主催者名は20文字以内で入力してください。
 	</div>
       </div>
       <div class="element_wrap">
@@ -39,6 +46,9 @@
 	<textarea name="event_detail"
 		  cols="50"
 		  rows="5"></textarea>
+	<div id="event_detail_alert_over">
+	  詳細は100文字以内で入力してください。
+	</div>
       </div>
       <h3>開催日候補</h3>
       <div class="element_wrap" id="day0">
@@ -78,25 +88,43 @@
        // またの機会に
       </script>
       <div class="element_wrap">
-	<input type="submit" name="create_button" value="確認">
+	<p>
+	  <input type="submit" name="create_button" value="確認">
+	</p>
       </div>
     </form>
     <script type="text/javascript">
-     document.getElementById("event_name_alert").style.display = "none";
-     document.getElementById("sponsor_name_alert").style.display = "none";
+     document.getElementById("event_name_alert_empty").style.display = "none";
+     document.getElementById("event_name_alert_over").style.display = "none";
+     document.getElementById("sponsor_name_alert_empty").style.display = "none";
+     document.getElementById("sponsor_name_alert_over").style.display = "none";
+     document.getElementById("event_detail_alert_over").style.display = "none";
      document.getElementById("event_days_alert").style.display = "none";
      function check_submit(form) {
-	 document.getElementById("event_name_alert").style.display = "none";
-	 document.getElementById("sponsor_name_alert").style.display = "none";
+	 document.getElementById("event_name_alert_empty").style.display = "none";
+	 document.getElementById("event_name_alert_over").style.display = "none";
+	 document.getElementById("sponsor_name_alert_empty").style.display = "none";
+	 document.getElementById("sponsor_name_alert_over").style.display = "none";
+	 document.getElementById("event_detail_alert_over").style.display = "none";
 	 document.getElementById("event_days_alert").style.display = "none";
      
 	 var is_ok = true;
 	 if (form.elements["event_name"].value == "") {
-	     document.getElementById("event_name_alert").style.display = "";
+	     document.getElementById("event_name_alert_empty").style.display = "";
+	     is_ok = false;
+	 } else if (30 < form.elements["event_name"].value.length) {
+	     document.getElementById("event_name_alert_over").style.display = "";
 	     is_ok = false;
 	 }
 	 if (form.elements["sponsor_name"].value == "") {
-	     document.getElementById("sponsor_name_alert").style.display = "";
+	     document.getElementById("sponsor_name_alert_empty").style.display = "";
+	     is_ok = false;
+	 } else if (20 < form.elements["sponsor_name"].value.length) {
+	     document.getElementById("sponsor_name_alert_over").style.display = "";
+	     is_ok = false;
+	 }
+	 if (100 < form.elements["event_detail"].value.length) {
+	     document.getElementById("event_detail_alert_over").style.display = "";
 	     is_ok = false;
 	 }
 	 var event_days_is_ok = false;

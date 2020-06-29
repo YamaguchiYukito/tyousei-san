@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <title>調整さん</title>
+    <link rel="stylesheet" href="../style.css">
   </head>
   <body>
-    <h1>イベント参加ページ</h1>
+    <h1>調整さん</h1>
     <h2>イベント情報</h2>
-    <table border="1" width="50%">
+    <table>
       <?php
       // ページのURLを設定
       $page_url = "<%PAGEURL>";
@@ -104,8 +105,11 @@
 		      }
 		      ?>">
       </div>
-      <div id="part_name_alert">
+      <div id="part_name_alert_empty">
 	名前を入力してください。
+      </div>
+      <div id="part_name_alert_over">
+	名前は20文字以内で入力してください。
       </div>
       <?php
       // それぞれの開催日程について、参加可否のラジオボタンをつける
@@ -150,29 +154,34 @@
 	  
 	  // 参加者のIDを決める処理
 	  $part_id = 0;
-	  $sql = "SELECT id FROM member_t ORDER BY id DESC LIMIT 1;";
+	  $sql = "SELECT id FROM member_t WHERE event_id = " .$event_id ." ORDER BY id DESC LIMIT 1;";
 	  $stmt = $pdo->query($sql);
 	  foreach($stmt as $s) {
 	      $part_id = $s['id'] + 1;
 	  }
 	  
 	  // 参加者をデータベースに登録
-	  $values = $part_id .", '" .$part_name ."'" .$part_date_string .", " .$event_id;
+	  $values = $event_id .", " .$part_id .", '" .$part_name ."'" .$part_date_string;
 	  $sql = "INSERT INTO member_t VALUES(" .$values .");";
 	  $stmt = $pdo->query($sql);
       }
       ?>
     </form>
     <script type="text/javascript">
-     document.getElementById("part_name_alert").style.display = "none";
+     document.getElementById("part_name_alert_empty").style.display = "none";
+     document.getElementById("part_name_alert_over").style.display = "none";
      document.getElementById("part_date_alert").style.display = "none";
      function check_submit(form) {
-	 document.getElementById("part_name_alert").style.display = "none";
+	 document.getElementById("part_name_alert_empty").style.display = "none";
+	 document.getElementById("part_name_alert_over").style.display = "none";
 	 document.getElementById("part_date_alert").style.display = "none";
 
 	 var is_ok = true;
 	 if (form.elements["part_name"].value == "") {
-	     document.getElementById("part_name_alert").style.display = "";
+	     document.getElementById("part_name_alert_empty").style.display = "";
+	     is_ok = false;
+	 } else if (20 < form.elements["part_name"].value.length) {
+	     document.getElementById("part_name_alert_over").style.display = "";
 	     is_ok = false;
 	 }
 	 for (var i = 0; i < <?php echo $event_date_num; ?>; i++) {
